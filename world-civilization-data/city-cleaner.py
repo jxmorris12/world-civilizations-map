@@ -126,11 +126,18 @@ for obj in objects:
 
 # clean up objects a bit
 for obj in objects:
+  # split lat and long
+  obj["latitude"]  = obj["latLng"][0]
+  obj["longitude"] = obj["latLng"][1]
+  del obj["latLng"]
+
+  # convert to ints
   if obj["year"][-2:] == "BC":
     obj["year"] = obj["year"][:len(obj["year"])-3]
     obj["year"] = int( obj["year"] ) * -1
 
   else:
+    obj["year"] = int( obj["year"] )
     obj["population"] = int( obj["population"] )
 
 # export objects
